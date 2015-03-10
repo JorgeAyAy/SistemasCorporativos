@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+
+<ui:decorate template="template.xhtml">
+        <ui:define name="conteudo">
+        
+<!-- PanelGrid para pesquisa do professor -->
+			<h:form id="consultaRegistro">
+			<h:panelGrid columns="5" width="200">
+					<p:outputLabel value="Pesquisar:  " />
+					<p:selectOneMenu value="#{registroBean.campo}">
+						<f:selectItem itemLabel="Número da aula" itemValue="numeroAula" />
+						<f:selectItem itemLabel="Data do registro" itemValue="objref" />
+					</p:selectOneMenu>
+					<p:selectOneMenu value="#{beanprofessor.tipoConsulta}">
+						<f:selectItem itemLabel="Que contenha..." itemValue="0" />
+						<f:selectItem itemLabel="Começando com..." itemValue="3" />
+						<f:selectItem itemLabel="Terminando com..." itemValue="2" />
+					</p:selectOneMenu>
+					<p:inputText value="#{registroBean.pesRegistro}" />
+					<p:commandButton icon="ui-icon-search"
+						actionListener="#{registroBean.findRegistro}" update="consultaRegistro" />
+				</h:panelGrid>
+				<p:dataTable id="tdregistro" value="#{registroBean.registroList}" var="registro" emptyMessage="Não foram encontrados registros ou a tabela ainda não foi carregada">
+					<p:column headerText="Ref">
+					<h:outputText value="#{registro.objref}"/>
+					</p:column>
+					<p:column headerText="Numero da Aula">
+					<h:outputText value="#{registro.numeroAula}"/>
+					</p:column>
+					<p:column headerText="Data">
+					<h:outputText value="#{registro.data}"/>
+					</p:column>
+					<p:column headerText="Descricao">
+					<h:outputText value="#{registro.descricao}"/>
+					</p:column>
+					<p:column headerText="Opções" >
+						<h:commandLink action="#{registroBean.editar}">
+							<h:graphicImage library="img" name="editar.png" style="border:0"/>
+							<f:setPropertyActionListener target="#{registroBean.registro}" value="#{registro}" />
+						</h:commandLink>
+						<h:commandLink action="#{beanprofessor.delete}" onclick="return confirm('Deseja realmente deletar o professor e todos as suas referências?')" >
+							<h:graphicImage library="img" name="excluir.png" style="border:0"/>
+							<f:setPropertyActionListener target="#{registroBean.registro}" value="#{registro}" />
+						</h:commandLink>
+					</p:column>
+				</p:dataTable>
+		</h:form>
+			<!-- Fim PanelGrid e datatable -->
+	
+
+        
+        </ui:define>
+        
+</ui:decorate>
+</html>

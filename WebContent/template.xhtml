@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
+ <!--  <meta http-equiv="refresh" content="60"/> -->
+ 
+    <h:head>
+    	<h:outputScript name="locale-primefaces.js" library="js" /> 
+    	<h:outputScript name="mascaras.js" library="js" /> 
+    	
+        <style type="text/css">
+            body {
+                font-family: geneva, arial, helvetica, sans-serif;
+                font-size: 60%;
+            }
+        </style>
+
+        <title>Sistema CadEI - VERSÃO TESTE</title>
+    </h:head>
+    <h:body>
+    <f:view>
+        <!-- Full layout -->
+        <p:layout fullPage="true">
+
+            <!-- cabeçalho-->
+            <p:layoutUnit position="north" header="Sistema CadEI - VERSÃO TESTE" >
+           	<br/>
+            </p:layoutUnit>
+            
+            
+            <!-- Menu lateral direito-->
+            <p:layoutUnit position="west" header="Menu" collapsible="true" >
+             
+    	<h:form >
+        		 <p:slideMenu backLabel="Voltar" >
+        				 <p:submenu label="Início" >
+                        	<p:menuitem title="Listar todos os alunos e registros com vários comandos como deletar, editar, escrever folha e gerar relatório" value="Lista" ajax="false" action="home"/>
+                        </p:submenu>
+                      <p:submenu label="Professor">
+                       		<p:menuitem value="Cadastro" ajax="false" action="#{beanprofessor.novo}"/>
+                        	<p:menuitem value="Consulta" ajax="false" action="consultaProfessor"/>
+                        </p:submenu>
+                        <p:submenu label="Aluno">
+                       		<p:menuitem value="Cadastro" ajax="false" action="#{alunoBean.novo}"/>
+                        </p:submenu>
+                        <p:submenu label="Registro">
+                       		<p:menuitem value="Cadastro" ajax="false" action="#{registroBean.novo}"/>
+                       		<p:menuitem value="Consulta" ajax="false" action="consultaRegistro"/>
+                        </p:submenu>
+                        <p:submenu  label="Configuracão" >
+                        	<p:menuitem  value="Criar banco" action="#{beanBanco.criar}" title="clique aqui para criar o banco de dados do sistema (obrigatório)"/>
+                        </p:submenu>
+     			</p:slideMenu>              
+       	</h:form>
+
+             </p:layoutUnit>
+
+            <!-- rodapé-->
+            <p:layoutUnit position="south" size="20">
+                Sistema CadEI - VERSÃO TESTE
+            </p:layoutUnit>
+
+            <!-- conteudo -->
+            <p:layoutUnit position="center">
+
+                <!-- monitor de eventos ajax -->
+                <p:ajaxStatus style="width:16px;height:16px;" id="ajaxStatusPanel" >
+                    <f:facet name="start">
+                        <h:graphicImage value="img/ajax-loader.gif" />
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value="" />
+                    </f:facet>
+                </p:ajaxStatus>
+<br />
+<!-- <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Status"   
+        draggable="false" closable="false">  
+    <p:graphicImage value="/design/ajaxloadingbar.gif" />
+      
+</p:dialog> 
+-->
+				<ui:insert name="conteudo">
+
+                </ui:insert>
+            </p:layoutUnit> 
+        </p:layout>
+
+ <ui:insert name="dialogs" />
+
+</f:view>
+    </h:body>
+</html>

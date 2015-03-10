@@ -1,0 +1,156 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+</h:head>
+
+<style type="text/css">
+#menu {
+	float: left;
+	padding-top: 30px;
+	padding-left: 10px;
+	font-family: Cambria;
+	font-size: 15px;
+	color: #6495ED;
+	text-align: left;
+}
+
+
+#listaalunoeregistro {
+	float: right;
+	width: 480px;
+	height: 480px;
+	border: 2px solid #6495ED;
+	padding: 10px;
+	margin-top: 25px;
+	margin-right: 350px;
+	font-family: calibri;
+	font-size: 13px;
+	border-radius: 50px;
+	text-align: center;
+}
+
+</style>
+
+<!-- VV MENU VV -->
+
+<h:body>
+
+
+	<!-- VV Lista de Alunos e Registros VV -->
+	<ui:decorate template="template.xhtml">
+		<ui:define name="conteudo">
+			<div id="listaalunoeregistro">
+			<h1>Lista de Alunos e Registros</h1>
+			<p:scrollPanel mode="native" style="width:479px; height:340px">
+
+					<f:metadata>
+						<f:event type="preRenderView" listener="#{beanaluno.popularList}" />
+					</f:metadata>
+					<h2>Alunos</h2>
+					<h:form id="cadastrofolhaaluno">
+						<p:dataTable var="aluno" value="#{beanaluno.alunoList}" emptyMessage="Não foram encontrados alunos ou a tabela ainda não foi carregada">
+							<p:column headerText="Nome">
+								<h:outputText value="#{aluno.nome}" />
+							</p:column>
+							<p:column headerText="NIS">
+								<h:outputText value="#{aluno.nis}" />
+							</p:column>
+							<p:column headerText="Matricula">
+								<h:outputText value="#{aluno.matricula}" />
+							</p:column>
+							<p:column headerText="Bolsa Família">
+								<h:outputText value="#{aluno.bolsaFamilia}" />
+							</p:column>
+							<p:column headerText="Opções">
+								<h:commandLink action="#{beanaluno.editar}">
+									<h:graphicImage library="img" title="editar" name="editar.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{beanaluno.aluno}"
+										value="#{aluno}" />
+								</h:commandLink>
+								
+								<h:commandLink id="grow" action="#{beanaluno.delete}"
+									onclick="return confirm('Deseja realmente deletar o aluno e todos as suas referências?')">
+									<h:graphicImage library="img" name="excluir.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{beanaluno.aluno}"
+										value="#{aluno}" />
+								</h:commandLink>
+								<p:tooltip id="toolTipGrow" for="grow" value="Clique aqui para deletar o dado aluno"
+               showEffect="clip" hideEffect="explode" />
+               
+               
+								<h:commandLink id="fade" action="#{beanaluno.editarFolha}">
+									<h:graphicImage library="img" name="doc.jpg"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{beanaluno.aluno}"
+										value="#{aluno}" />
+								</h:commandLink>
+								<p:tooltip id="toolTipFade" for="fade" value="Clique aqui para ver a folha do aluno e alterar seus dados" />
+								
+								<h:commandLink id="track" action="#{beanaluno.imprimirSalvar}">
+									<h:graphicImage library="img" name="rel.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{beanaluno.aluno}"
+										value="#{aluno}" />
+								</h:commandLink>
+								<p:tooltip id="toolTipTrack" for="track" value="Clique aqui para gerar um relatório do dado aluno com uma tabela com os dados do aprendizado em PDF" trackMouse="true" />
+								
+								<h:commandLink title="clique aqui para gerar um gráfico de pizza com o resumo das frequências do dado aluno" action="#{beanaluno.criarGrafico}">
+									<h:graphicImage library="img"  name="frequencia.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{beanaluno.aluno}"
+										value="#{aluno}" />
+								</h:commandLink>
+							</p:column>
+
+						</p:dataTable>
+					</h:form>
+					<hr></hr>
+					<f:metadata>
+						<f:event type="preRenderView"
+							listener="#{registroBean.popularList}" />
+					</f:metadata>
+					<h2>Registros</h2>
+					<h:form id="registro">
+						<p:dataTable value="#{registroBean.registroList}" var="registro" emptyMessage="Não foram encontrados registros ou a tabela ainda não foi carregada">
+
+							<p:column headerText="Numero aula">
+								<h:outputText value="#{registro.numeroAula}" />
+							</p:column>
+							<p:column headerText="Data">
+								<h:outputText value="#{registro.data}" />
+							</p:column>
+							<p:column headerText="Descricao">
+								<h:outputText value="#{registro.descricao}" />
+							</p:column>
+
+							<p:column headerText="Opções">
+								<h:commandLink action="#{registroBean.editar}">
+									<h:graphicImage library="img" name="editar.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{registroBean.registro}"
+										value="#{registro}" />
+								</h:commandLink>
+								<h:commandLink action="#{registroBean.delete}"
+									onclick="return confirm('Deseja realmente deletar o registro e todos as suas referências?')">
+									<h:graphicImage library="img" name="excluir.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{registroBean.registro}"
+										value="#{registro}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</p:scrollPanel>
+			</div>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+</html>

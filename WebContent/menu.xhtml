@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!--  <meta http-equiv="refresh" content="60"/> -->
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form>
+		<h1 style="margin-top: 0"></h1>
+		<p:menu>
+			<p:submenu label="">
+				<p:menuitem value="Home" outcome="home"/>
+				<p:menuitem value="Novo Aluno" outcome="cadastrofolhaaluno"/>
+				<p:menuitem value="Novo Registro " outcome="registro" action="#{registroBean.novo}"/>
+			</p:submenu>
+			<p:submenu label="">
+				<p:menuitem value="Relatórios" />
+				<p:menuitem value="Gráficos de Frequência" />
+				<p:menuitem value="Observações" />
+				<p:menuitem value="Histórico" />
+			</p:submenu>
+			<p:submenu label="">
+			</p:submenu>
+		</p:menu>
+	</h:form>
+</h:body>
+</html>

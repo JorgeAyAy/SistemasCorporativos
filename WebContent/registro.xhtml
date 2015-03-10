@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+</h:head>
+
+<style type="text/css">
+#menu {
+	float: left;
+	padding-top: 159px;
+	padding-left: 10px;
+	font-family: Cambria;
+	font-size: 15px;
+	color: #6495ED;
+	text-align: left;
+}
+
+#novoregistro {
+	float: right;
+	width: 480px;
+	height: 480px;
+	border: 2px solid #6495ED;
+	padding: 10px;
+	margin-top: 79px;
+	margin-right: 330px;
+	font-family: calibri;
+	font-size: 13px;
+	border-radius: 50px;
+	text-align: center;
+}
+
+#botao {
+	padding-top: 70px;
+}
+</style>
+
+<h:body>
+	<ui:decorate template="template.xhtml">
+		<ui:define name="conteudo">
+			<h:form id="registro">
+				<div>
+					<h:panelGrid columns="1" cellpadding="4">
+						<h:inputHidden value="#{registroBean.registro.objref}" />
+						<h:outputLabel for="numeroaula" value="Número da aula: "
+							style="font-size:13" />
+						<p:inputText value="#{registroBean.registro.numeroAula}"
+							id="numeroAula" required="true" />
+						<h:outputLabel for="popup" value="Data: " style="font-size:13" />
+						<p:calendar value="#{registroBean.registro.data}" id="popup"
+							mask="true" pattern="dd/MM/yyyy" />
+						<h:outputLabel for="descricao" value="Descrição: "
+							style="font-size:13" />
+						<p:inputTextarea rows="6" cols="33"
+							value="#{registroBean.registro.descricao}" id="descricao"
+							required="true" />
+						<div id="botao">
+							<p:commandButton title="clique aqui para salvar suas edições" value="Salvar" action="#{registroBean.salvar}"
+								icon="ui-icon-disk" />
+						</div>
+					</h:panelGrid>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!--  <meta http-equiv="refresh" content="60"/> -->
+
+<h:head>
+	<h:outputScript name="locale-primefaces.js" library="js" />
+	<h:outputScript name="mascaras.js" library="js" />
+
+	<style type="text/css">
+body {
+	
+}
+</style>
+
+	<title>Sistema CadEI - VERSÃO TESTE</title>
+</h:head>
+
+<style type="text/css">
+
+#botao {
+	float: right;
+	padding-top: 55px;
+	padding-left: 250px;
+	text-align: right;
+	font-size: 15px;
+}
+
+#folhaaluno {
+	float: right;
+	width: 1040px;
+	height: 480px;
+	border: 2px solid #6495ED;
+	padding: 10px;
+	margin-top: 10px;
+	margin-right: 80px;
+	text-align: right;
+	font-family: calibri;
+	font-size: 13px;
+	border-radius: 50px;
+}
+</style>
+
+<h:body>
+	<f:view>
+		<div id="folhaaluno">
+			<h:form>
+
+				<h:panelGrid columns="2" cellpadding="2">
+					<h:panelGrid columns="1" cellpadding="2">
+						<h3>Frequência</h3>
+						<p:scrollPanel mode = "native" style="width:300px; height:400px">
+							<table border="1">
+								<tr>
+									<th>Meses</th>
+									<th colspan="13">Faltas</th>
+								</tr>
+								<tr>
+									<th>01</th>
+									<h:inputHidden value="#{beanaluno.aluno.folha.frequencia.objref}"/>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.janeiro}" id="jan" /></td>
+								</tr>
+								<tr>
+									<th>02</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.fevereiro}" id="fev" /></td>
+								</tr>
+								<tr>
+									<th>03</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.marco}" id="mar" /></td>
+								</tr>
+								<tr>
+									<th>04</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.abril}" id="abr"  /></td>
+								</tr>
+								<tr>
+									<th>05</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.maio}" id="mai" /></td>
+								</tr>
+								<tr>
+									<th>06</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.junho}" id="jun" /></td>
+								</tr>
+								<tr>
+									<th>07</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.julho}" id="jul" /></td>
+								</tr>
+								<tr>
+									<th>08</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.agosto}" id="ago" /></td>
+								</tr>
+								<tr>
+									<th>09</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.setembro}" id="set" /></td>
+								</tr>
+								<tr>
+									<th>10</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.outubro}" id="out" /></td>
+								</tr>
+								<tr>
+									<th>11</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.novembro}" id="nov"/></td>
+								</tr>
+								<tr>
+									<th>12</th>
+									<td colspan="13"><p:inputText value="#{beanaluno.aluno.folha.frequencia.dezembro}" id="dez" /></td>
+								</tr>
+							</table>
+						</p:scrollPanel>
+					</h:panelGrid>
+
+					<h:panelGrid columns="1" cellpadding="2">
+						<h3>Direitos de Aprendizagem</h3>
+						<p:scrollPanel mode = "native" style="width:600px; height:400px">
+							<table border="1">
+								<tr>
+									<th></th>
+									<th colspan="2" style="background-color:#9966CC" >1º Semestre</th>
+									<th colspan="2" style="background-color:#99FFFF">2º Semestre</th>
+								</tr>
+								<tr>
+									<th>Língua Portuguesa</th>
+									<th>1ºB</th>
+									<th>2ºB</th>
+									<th>3ºB</th>
+									<th>4ºB</th>
+								</tr>
+								<tr>
+									<td>Lê textos (poemas, canções, tirinhas, textos de
+										tradução oral, dentre outros), com autonomia.</td>
+									<h:inputHidden value="#{beanaluno.aluno.folha.aprendizagem.objref}"/>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao1}" effect="fold" editable="true" id="opcao" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao2}" id="opcao2" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao3}" id="opcao3" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao4}" id="opcao4" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+								</tr>
+								<tr>
+									<th>Matemática</th>
+									<th>1ºB</th>
+									<th>2ºB</th>
+									<th>3ºB</th>
+									<th>4ºB</th>
+								</tr>
+
+								<tr>
+									<td>Identifica números em diferentes contextos.</td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao5}" id="opcao5" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao6}" id="opcao6" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao7}" id="opcao7" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao8}" id="opcao8" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+								</tr>
+								<tr>
+									<th>História</th>
+									<th>1ºB</th>
+									<th>2ºB</th>
+									<th>3ºB</th>
+									<th>4ºB</th>
+								</tr>
+								<tr>
+									<td>Identifica o contexto histórico dos espaços de
+										convivência (casa, rua, bairro) como elemento constituinte.</td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao9}" id="opcao9" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao10}" id="opcao10" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao11}" id="opcao11" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao12}" id="opcao12" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+								</tr>
+								<tr>
+									<th>Geografia</th>
+									<th>1ºB</th>
+									<th>2ºB</th>
+									<th>3ºB</th>
+									<th>4ºB</th>
+								</tr>
+								<tr>
+									<td>Conhece e valoriza as relações entre as pessoas e o
+										lugar: os elementos da cultura, as relações afetivas e de
+										identidade com o lugar onde vive.</td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao13}" id="opcao13" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao14}" id="opcao14" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao15}" id="opcao15" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao16}" id="opcao16" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+								</tr>
+								<tr>
+									<th>Ciênciasss</th>
+									<th>1ºB</th>
+									<th>2ºB</th>
+									<th>3ºB</th>
+									<th>4ºB</th>
+								</tr>
+								<tr>
+									<td>Aprende como a ciência constrói conhecimento sobre
+										fenômenos naturais.</td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao17}" id="opcao17" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao18}" id="opcao18" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao19}" id="opcao19" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+									<td><p:selectOneMenu value="#{beanaluno.aluno.folha.aprendizagem.opcao20}" id="opcao20" effect="fold" editable="true" style="width:100px">
+											<f:selectItem itemLabel="Nenhum" itemValue="" />
+											<f:selectItem itemLabel="CEC" itemValue="CEC" />
+											<f:selectItem itemLabel="AD" itemValue="AD" />
+											<f:selectItem itemLabel="CC" itemValue="CC" />
+										</p:selectOneMenu></td>
+								</tr>
+							</table>
+
+						</p:scrollPanel>
+
+					</h:panelGrid>
+				</h:panelGrid>
+				<div id="botao">
+					<p:commandButton value="Salvar" action="#{beanaluno.beanFolha.salvar}"
+								icon="ui-icon-disk" title="clique aqui para salvar suas edições"/>
+				</div>
+			</h:form>
+		</div>
+		<!-- <p:dialog header="Sistema Cadel" widgetVar="dlg2" modal="true"
+			height="100">
+			<h:outputText value="Folha do aluno salva com sucesso!" />
+		</p:dialog> -->
+	</f:view>
+</h:body>
+</html>

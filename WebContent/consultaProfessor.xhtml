@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+
+<ui:decorate template="template.xhtml">
+        <ui:define name="conteudo">
+        
+<!-- PanelGrid para pesquisa do professor -->
+			<h:form id="consultaProfessor">
+			<h:panelGrid columns="5" width="200">
+					<p:outputLabel value="Pesquisar:  " />
+					<p:selectOneMenu value="#{beanprofessor.campo}">
+						<f:selectItem itemLabel="Nome do Professor" itemValue="nome" />
+						<f:selectItem itemLabel="Ref do Professor" itemValue="objref" />
+						<f:selectItem itemLabel="Nome turma" itemValue="turma" />
+						<f:selectItem itemLabel="EMAIL" itemValue="email" />
+					</p:selectOneMenu>
+					<p:selectOneMenu value="#{beanprofessor.tipoConsulta}">
+						<f:selectItem itemLabel="Que contenha..." itemValue="0" />
+						<f:selectItem itemLabel="Começando com..." itemValue="3" />
+						<f:selectItem itemLabel="Terminando com..." itemValue="2" />
+					</p:selectOneMenu>
+					<p:inputText value="#{beanprofessor.pesProfessor}" />
+					<p:commandButton icon="ui-icon-search"
+						actionListener="#{beanprofessor.findProfessor}" update="consultaProfessor" />
+				</h:panelGrid>
+				<p:dataTable id="tdprofessor" value="#{beanprofessor.professorList}" var="professor" emptyMessage="Não foram encontrados registros ou a tabela ainda não foi carregada">
+					<p:column headerText="Ref">
+					<h:outputText value="#{professor.objref}"/>
+					</p:column>
+					<p:column headerText="Nome">
+					<h:outputText value="#{professor.nome}"/>
+					</p:column>
+					<p:column headerText="Email">
+					<h:outputText value="#{professor.email}"/>
+					</p:column>
+					<p:column headerText="Turma">
+					<h:outputText value="#{professor.turma}"/>
+					</p:column>
+					<p:column headerText="Opções" >
+						<h:commandLink action="#{beanprofessor.editar}">
+							<h:graphicImage library="img" name="editar.png" style="border:0"/>
+							<f:setPropertyActionListener target="#{beanprofessor.professor}" value="#{professor}" />
+						</h:commandLink>
+						<h:commandLink action="#{beanprofessor.delete}" onclick="return confirm('Deseja realmente deletar o professor e todos as suas referências?')" >
+							<h:graphicImage library="img" name="excluir.png" style="border:0"/>
+							<f:setPropertyActionListener target="#{beanprofessor.professor}" value="#{professor}" />
+						</h:commandLink>
+					</p:column>
+				</p:dataTable>
+		</h:form>
+			<!-- Fim PanelGrid e datatable -->
+	
+
+        
+        </ui:define>
+        
+</ui:decorate>
+</html>
