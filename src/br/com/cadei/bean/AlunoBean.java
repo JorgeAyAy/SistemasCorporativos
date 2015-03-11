@@ -292,6 +292,17 @@ public class AlunoBean implements Serializable {
 
 			HibernateUtil.getSessionFactory().getCurrentSession().evict(aluno);
 
+			ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(Aprendizagem.class);
+			Aprendizagem a = aluno.getFolha().getAprendizagem();
+			daoAprendizagem.delete(a);
+			
+			ClassDao<Frequencia> daoFrequencia = new ClassDao<Frequencia>(Frequencia.class);
+			Frequencia f = aluno.getFolha().getFrequencia();
+			daoFrequencia.save(f);
+			
+			Folha folha = aluno.getFolha();
+			daoFolha.delete(folha);
+			
 			aluno = daoAluno.findByCod(aluno.getObjref());
 			daoAluno.delete(aluno);
 			fc.addMessage("home", new FacesMessage(
