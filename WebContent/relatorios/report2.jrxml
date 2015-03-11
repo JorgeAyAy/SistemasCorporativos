@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="168"/>
+	<parameter name="cod_aluno" class="java.lang.Integer"/>
+	<parameter name="objref" class="java.lang.Long" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select al.nome, al.matricula, al.nis, a.*, fr.*
+from aprendizagem a
+join folha f on f.objref = a.objref
+join aluno al on al.objref = f.objref
+join frequencia fr on al.objref = fr.objref
+where al.objref = $P{cod_aluno}
+group by a.objref,al.nome, al.matricula, al.nis, fr.objref]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="matricula" class="java.lang.Long"/>
+	<field name="nis" class="java.lang.Long"/>
+	<field name="objref" class="java.lang.Integer"/>
+	<field name="opcao1" class="java.lang.String"/>
+	<field name="opcao10" class="java.lang.String"/>
+	<field name="opcao11" class="java.lang.String"/>
+	<field name="opcao12" class="java.lang.String"/>
+	<field name="opcao13" class="java.lang.String"/>
+	<field name="opcao14" class="java.lang.String"/>
+	<field name="opcao15" class="java.lang.String"/>
+	<field name="opcao16" class="java.lang.String"/>
+	<field name="opcao17" class="java.lang.String"/>
+	<field name="opcao18" class="java.lang.String"/>
+	<field name="opcao19" class="java.lang.String"/>
+	<field name="opcao2" class="java.lang.String"/>
+	<field name="opcao20" class="java.lang.String"/>
+	<field name="opcao3" class="java.lang.String"/>
+	<field name="opcao4" class="java.lang.String"/>
+	<field name="opcao5" class="java.lang.String"/>
+	<field name="opcao6" class="java.lang.String"/>
+	<field name="opcao7" class="java.lang.String"/>
+	<field name="opcao8" class="java.lang.String"/>
+	<field name="opcao9" class="java.lang.String"/>
+	<field name="abril" class="java.lang.String"/>
+	<field name="agosto" class="java.lang.String"/>
+	<field name="dezembro" class="java.lang.String"/>
+	<field name="fevereiro" class="java.lang.String"/>
+	<field name="janeiro" class="java.lang.String"/>
+	<field name="julho" class="java.lang.String"/>
+	<field name="junho" class="java.lang.String"/>
+	<field name="maio" class="java.lang.String"/>
+	<field name="marco" class="java.lang.String"/>
+	<field name="novembro" class="java.lang.String"/>
+	<field name="outubro" class="java.lang.String"/>
+	<field name="setembro" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="222">
+			<rectangle>
+				<reportElement x="0" y="187" width="545" height="30" backcolor="#666666" />
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="197" width="78" height="20" forecolor="#FFFFFF" />
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C��digo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="74" width="253" height="20"/>
+				<textElement markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="74" width="45" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aluno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="0" width="245" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relat��rio Aluno Aprendizagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="165" width="78" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="18" width="537" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="8" y="94" width="64" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matr��cula:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="94" width="253" height="20"/>
+				<textElement markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matricula}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="114" width="64" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="114" width="253" height="20"/>
+				<textElement markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nis}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="88" y="197" width="245" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aprendizagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="197" width="191" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Frequencia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="13"/>
+	</columnHeader>
+	<detail>
+		<band height="422">
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="6" width="82" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="6" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="26" width="82" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="26" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="46" width="82" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="46" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="66" width="82" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="66" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="86" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="86" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="106" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="106" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="126" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="126" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="146" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="146" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="166" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="166" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="286" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao15}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="286" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="266" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao14}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="266" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="246" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao13}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="246" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="226" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="226" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="206" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="206" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="186" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="186" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="306" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="306" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao16}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="326" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="326" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao17}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="346" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="346" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao18}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="366" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="366" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao19}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="386" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objref}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="386" width="245" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opcao20}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="6" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Janeiro:" + $F{janeiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="26" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fevereiro:" + $F{fevereiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="46" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mar��o:" + $F{marco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="66" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Abril:" + $F{abril}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="86" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Maio:" + $F{maio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="106" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Junho:" + $F{junho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="126" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Julho:" + $F{julho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="146" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agosto:" + $F{agosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="166" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Setembro:" + $F{setembro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="186" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Outubro:" + $F{outubro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="206" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Novembro:" + $F{novembro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="226" width="191" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dezembro:" + $F{dezembro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="10"/>
+	</pageFooter>
+	<summary>
+		<band height="17">
+			<line>
+				<reportElement x="8" y="16" width="537" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

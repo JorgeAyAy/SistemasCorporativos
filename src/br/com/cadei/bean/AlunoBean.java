@@ -99,6 +99,35 @@ public class AlunoBean implements Serializable {
 		return null;
 	}
 	
+	public String imprimirBackup() {
+
+		try {
+			Connection con = ((SessionFactoryImplementor) HibernateUtil
+					.getSessionFactory()).getConnectionProvider()
+					.getConnection();
+			String arquivo = FacesContext.getCurrentInstance()
+					.getExternalContext()
+					.getRealPath("relatorios/report2.jrxml");
+			JasperReport jr = JasperCompileManager.compileReport(arquivo);
+			Map<String, Integer> parameters = new HashMap<String, Integer>();
+			parameters.put("cod_aluno", aluno.getObjref());
+			JasperPrint jp = JasperFillManager.fillReport(jr, parameters, con);
+			HttpServletResponse res = (HttpServletResponse) FacesContext
+					.getCurrentInstance().getExternalContext().getResponse();
+			res.setContentType("application/pdf");
+			OutputStream out = res.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jp, out);
+			out.flush();
+			out.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		return null;
+	}
+	
 	public String editarFolha(){
 		
 		beanFolha.setAprendizagem(aluno.getFolha().getAprendizagem());

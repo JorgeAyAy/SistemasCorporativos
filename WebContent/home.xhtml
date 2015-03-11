@@ -108,6 +108,12 @@
 									<f:setPropertyActionListener target="#{beanaluno.aluno}"
 										value="#{aluno}" />
 								</h:commandLink>
+								<h:commandLink title="clique aqui para gerar um backup do aluno" action="#{beanaluno.imprimirBackup}">
+									<h:graphicImage library="img" name="rel.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{beanaluno.aluno}"
+										value="#{aluno}" />
+								</h:commandLink>
 							</p:column>
 
 						</p:dataTable>
