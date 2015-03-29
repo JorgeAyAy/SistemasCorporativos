@@ -13,6 +13,6 @@
 
 </head>
 <body>
-<jsp:forward page="login.jsf"></jsp:forward>
+<jsp:forward page="login.xhtml"></jsp:forward>
 </body>
 </html>

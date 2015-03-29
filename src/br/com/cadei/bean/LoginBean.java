@@ -3,12 +3,13 @@ package br.com.cadei.bean;
 import java.io.Serializable;
 
 
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 
 @ManagedBean(name="loginBean")
-@RequestScoped
+@SessionScoped
 public class LoginBean implements Serializable{
 
 	
@@ -18,7 +19,8 @@ public class LoginBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String login, senha;
+	private String login;
+	private String senha;
 	private ProfessorBeanIF professor = new ProfessorBean();
 	
 
@@ -30,7 +32,7 @@ public class LoginBean implements Serializable{
 		if(this.login == null){
 			return "index?faces-redirect=true";
 		}
-		else if(professor.validarSenhaProfessor(this.login, this.senha)){
+		 if(professor.validarSenhaProfessor(this.getLogin(), this.getSenha())){
 			return "index?faces-redirect=true";
 		}
 		return null;

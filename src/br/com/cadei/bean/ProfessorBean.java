@@ -161,7 +161,7 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 				fc.addMessage(null, ms);
 			}
 		}else{
-			fc.addMessage("cadastroProfessor", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas não conferem.", null));
+			fc.addMessage("cadastroProfessor", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas n��o conferem.", null));
 		}
 		
 			return null;
@@ -250,20 +250,19 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 	@Override
 	public boolean validarSenhaProfessor(String nomeProfessor, String senha) {
 		FacesContext fc = FacesContext.getCurrentInstance();
-		if(nomeProfessor.isEmpty() && senha.isEmpty()){
-			fc.addMessage("login", new FacesMessage("Digite: login e senha."));
-			return false;
-		}
-		
-		for(Professor p : this.dao.findAll()){
+//		if(nomeProfessor.isEmpty() && senha.isEmpty()){
+//			fc.addMessage("login", new FacesMessage("Digite: login e senha."));
+//			return false;
+//		}
+		List<Professor> professores = this.dao.findAll();
+		for(int i =  0; i < professores.size(); i++){
 			
-			if(p.getNome().equals(nomeProfessor) && (p.getSenha().equals(senha))){
+			if(professores.get(i).getNome().equals(nomeProfessor) && (professores.get(i).getSenha().equals(senha))){
 				fc.addMessage("login", new FacesMessage("Logado!"));
 				return true;
 			}
-			
 		}
-		fc.addMessage("login", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha inválido.", null));
+		fc.addMessage("login", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha inv��lido.", null));
 		return false;
 	}
 	
