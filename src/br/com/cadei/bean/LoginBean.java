@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 
 
+
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 
 @ManagedBean(name="loginBean")
@@ -29,11 +33,15 @@ public class LoginBean implements Serializable{
 	}
 	
 	public String logar(){
-		if(this.login == null){
-			return "index?faces-redirect=true";
-		}
+		FacesContext fc = FacesContext.getCurrentInstance();
+		System.out.println(this.getLogin());
+		if(this.getLogin() == null || this.getSenha() == null){
+			fc.addMessage("login", new FacesMessage("Digite o login e/ou a senha."));
+		}else{
+		
 		 if(professor.validarSenhaProfessor(this.getLogin(), this.getSenha())){
 			return "index?faces-redirect=true";
+		}
 		}
 		return null;
 	}

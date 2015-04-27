@@ -262,7 +262,7 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 				return true;
 			}
 		}
-		fc.addMessage("login", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha inv��lido.", null));
+		fc.addMessage("login", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha inválido.", null));
 		return false;
 	}
 	

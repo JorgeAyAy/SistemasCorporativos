@@ -21,6 +21,7 @@
 		<mapping class="br.com.cadei.entidade.Folha" />
 		<mapping class="br.com.cadei.entidade.Aluno" />
 		<mapping class="br.com.cadei.grafico.ChartView" />
+		<mapping class="br.com.cadei.bean.LoginBean" />
 		
 	</session-factory>
 	

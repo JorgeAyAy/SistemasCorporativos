@@ -16,21 +16,21 @@
             }
         </style>
 
-
+		<link href="#{request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </h:head>
 <h:body>
 <f:view>
 		<h:form id="login">
 		<p:messages autoUpdate="true"/>
 			<p:dialog header="Login - Sistema CadEI  " widgetVar="dlgLogin"
-				appendTo="@(body)" closable="false" maximizable="false"
-				minimizable="false" modal="true" visible="true" resizable="false" draggable="false" >
+				 closable="false" maximizable="false"
+				 modal="true" visible="true" >
 				<h:panelGrid columns="2">
 					<h:outputText value="Usuario:" />
 					<p:inputText value="#{loginBean.login}" required="true" requiredMessage="Digite o login."/>
 					<h:outputText value="Senha:" />
 					<p:password value="#{loginBean.senha}" required="true" requiredMessage="Digite a senha."/>
-					<p:commandButton value="Entrar" action="#{loginBean.logar}" />
+					<p:commandButton value="Entrar" action="#{loginBean.logar}"  />
 					<p:commandButton value="Cadastra Professor" action="cadastroProfessor?faces-redirect=true" />
 				</h:panelGrid>
 			</p:dialog>
