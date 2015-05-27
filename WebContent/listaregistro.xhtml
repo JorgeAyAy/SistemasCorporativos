@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+<title>Sistema CadEI - VERSÃO TESTE</title>
+<link href="#{request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</h:head>
+
+<style type="text/css">
+#menu {
+	float: left;
+	padding-top: 30px;
+	padding-left: 10px;
+	font-family: Cambria;
+	font-size: 15px;
+	color: #6495ED;
+	text-align: left;
+}
+
+#listaeregistro {
+	float: right;
+	width: 880px;
+	height: 480px;
+	border: 2px solid #6495ED;
+	padding: 10px;
+	margin-top: 25px;
+	margin-right: 150px;
+	font-family: calibri;
+	font-size: 13px;
+	border-radius: 50px;
+	text-align: inline;
+	
+}
+
+h1 {
+    text-align: center;
+}
+
+</style>
+
+
+
+<!-- VV MENU VV -->
+
+<h:body >
+
+
+	<!-- VV Lista de Alunos e Registros VV -->
+	<ui:decorate template="template.xhtml">
+		<ui:define name="conteudo">
+			<div id="listaregistro">
+				<h1>Lista de Registros</h1>
+					<hr></hr>
+					<f:metadata>
+						<f:event type="preRenderView" listener="#{registroBean.popularList}" />
+					</f:metadata>
+					
+					<h:form id="registro"> 
+					
+					<p:growl id="msgs" showDetail="true" />
+					
+					
+					<p:accordionPanel value="#{registroBean.registroList}" var="registro" activeIndex="" multiple="true" dynamic="false" cache="false">
+						<p:ajax event="tabChange" listener="#{registroBean.onTabChange}" update=":registro:msgs" />
+       					<p:ajax event="tabClose" listener="#{registroBean.onTabClose}" update=":registro:msgs" />
+						
+						<p:tab title="Registro - #{registro.numeroAula}">
+							<h:panelGrid columns="2" cellpadding="5" id="registros">
+								<h:outputText value="Data:" style="font-weight: bold" />
+								<h:outputText value="#{registro.data}" />
+
+								<h:outputText value="Descrição:" style="font-weight: bold" />
+								<h:outputText value="#{registro.descricao}"  />
+								
+								
+								<p:column headerText="Opções">
+								<h:commandLink action="#{registroBean.editar}" title="clique aqui para editar o registro" >
+									<h:graphicImage library="img" name="editar.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{registroBean.registro}"
+										value="#{registro}" />
+								</h:commandLink>
+								<h:commandLink  action="#{registroBean.delete}"
+									onclick="return confirm('Deseja realmente deletar o registro e todos as suas referências?')" title="clique aqui para deletar o registro">
+									<h:graphicImage library="img" name="excluir.png"
+										style="border:0" />
+									<f:setPropertyActionListener target="#{registroBean.registro}"
+										value="#{registro}" />
+								</h:commandLink>
+							</p:column>
+								
+							</h:panelGrid>
+						</p:tab>
+					</p:accordionPanel>
+					</h:form>
+			</div>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+</html>

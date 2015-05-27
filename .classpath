@@ -28,7 +28,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jfreechart-1.0.12.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsf-api-2.2.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsf-impl-2.2.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsf-impl-2.2.1.jar" sourcepath="C:/Users/Jorge/.m2/repository/com/sun/faces/jsf-impl/2.2.1/jsf-impl-2.2.1-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jta-1.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/junit-4.12.jar"/>

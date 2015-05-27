@@ -48,7 +48,7 @@ public class AlunoBean implements Serializable {
 	private ClassDao<Folha> daoFolha;
 	private int tipoConsulta;
 	private String campo;
-	private Folha folha; //MODIFICADO
+	private Folha folha; // MODIFICADO
 	private String pesAluno;
 	private Constantes constantes = new Constantes();
 	private FolhaBean beanFolha = new FolhaBean();
@@ -65,11 +65,11 @@ public class AlunoBean implements Serializable {
 		daoAluno = new ClassDao<Aluno>(Aluno.class);
 		daoFolha = new ClassDao<Folha>(Folha.class);
 	}
-	
-	public void popularList(){
+
+	public void popularList() {
 		alunoList = daoAluno.findAll();
 	}
-	
+
 	public String imprimirSalvar() {
 
 		try {
@@ -98,7 +98,7 @@ public class AlunoBean implements Serializable {
 
 		return null;
 	}
-	
+
 	public String imprimirBackup() {
 
 		try {
@@ -127,9 +127,9 @@ public class AlunoBean implements Serializable {
 
 		return null;
 	}
-	
-	public String editarFolha(){
-		
+
+	public String editarFolha() {
+
 		beanFolha.setAprendizagem(aluno.getFolha().getAprendizagem());
 		beanFolha.setFrequencia(aluno.getFolha().getFrequencia());
 		beanFolha.setFolha(aluno.getFolha());
@@ -153,8 +153,8 @@ public class AlunoBean implements Serializable {
 		return "cadastrofolhaaluno?faces-redirect=true";
 
 	}
-	
-	public String criarGrafico(){
+
+	public String criarGrafico() {
 		createPieModels();
 		return "graficofrequencia?faces-redirect=true";
 	}
@@ -231,26 +231,45 @@ public class AlunoBean implements Serializable {
 	public String salvar() {
 
 		FacesContext fc = FacesContext.getCurrentInstance();
-		
+
 		folha = new Folha();
-		
-		ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(Aprendizagem.class);
+
+		ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(
+				Aprendizagem.class);
 		Aprendizagem a = new Aprendizagem();
 		daoAprendizagem.save(a);
-		
-		ClassDao<Frequencia> daoFrequencia = new ClassDao<Frequencia>(Frequencia.class);
+
+		ClassDao<Frequencia> daoFrequencia = new ClassDao<Frequencia>(
+				Frequencia.class);
 		Frequencia f = new Frequencia();
 		daoFrequencia.save(f);
- 		
+
 		this.folha.setAprendizagem(a);
 		this.folha.setFrequencia(f);
-		this.aluno.setFolha(folha); //MODIFICADO
+		this.aluno.setFolha(folha); // MODIFICADO
 		this.daoFolha.save(folha);
-		
-		
+
 		if (aluno.getObjref() != 0) {
 			try {
 				daoAluno.update(aluno);
+				novo();
+				fc.addMessage("home", new FacesMessage(
+						"Aluno Editado com sucesso!!!"));
+				aluno = new Aluno();
+				alunoList = daoAluno.findAll();
+				novo();
+			} catch (Exception e) {
+				e.printStackTrace();
+				FacesMessage ms = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"ERROR", e.getMessage());
+				fc.addMessage(null, ms);
+				return null;
+			}
+
+		} else {
+
+			try {
+				daoAluno.create(aluno);
 				novo();
 				fc.addMessage("home", new FacesMessage(
 						"Aluno Salvo com sucesso!!!"));
@@ -264,23 +283,6 @@ public class AlunoBean implements Serializable {
 				fc.addMessage(null, ms);
 				return null;
 			}
-
-		}
-
-		try {
-			daoAluno.create(aluno);
-			novo();
-			fc.addMessage("home", new FacesMessage(
-					"Aluno Salvo com sucesso!!!"));
-			aluno = new Aluno();
-			alunoList = daoAluno.findAll();
-			novo();
-		} catch (Exception e) {
-			e.printStackTrace();
-			FacesMessage ms = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"ERROR", e.getMessage());
-			fc.addMessage(null, ms);
-			return null;
 		}
 
 		return "home";
@@ -292,17 +294,19 @@ public class AlunoBean implements Serializable {
 
 			HibernateUtil.getSessionFactory().getCurrentSession().evict(aluno);
 
-			ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(Aprendizagem.class);
+			ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(
+					Aprendizagem.class);
 			Aprendizagem a = aluno.getFolha().getAprendizagem();
 			daoAprendizagem.delete(a);
-			
-			ClassDao<Frequencia> daoFrequencia = new ClassDao<Frequencia>(Frequencia.class);
+
+			ClassDao<Frequencia> daoFrequencia = new ClassDao<Frequencia>(
+					Frequencia.class);
 			Frequencia f = aluno.getFolha().getFrequencia();
 			daoFrequencia.save(f);
-			
+
 			Folha folha = aluno.getFolha();
 			daoFolha.delete(folha);
-			
+
 			aluno = daoAluno.findByCod(aluno.getObjref());
 			daoAluno.delete(aluno);
 			fc.addMessage("home", new FacesMessage(
@@ -314,7 +318,7 @@ public class AlunoBean implements Serializable {
 			fc.addMessage(null, ms);
 		}
 		findAluno();
-		return null;
+		return "home";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -338,44 +342,80 @@ public class AlunoBean implements Serializable {
 		return null;
 
 	}
-	
 
-	//*CRIAR GR�FICOS*//
-	
-    private PieChartModel graficofrequencia;
-     
-    public PieChartModel getPieModel2() {
-        return graficofrequencia;
-    }
-     
-    private void createPieModels() {
-        createPieModel2();
-    }
- 
-    private void createPieModel2() {
-    	graficofrequencia = new PieChartModel();
-    	
-//    	aluno.getFolha().setFrequencia(folha.getFrequencia());
-    	
-//    	graficofrequencia.set("Janeiro", Integer.parseInt(aluno.getFolha().getFrequencia().getJaneiro()));
-    	graficofrequencia.set("Janeiro", Integer.parseInt(this.aluno.getFolha().getFrequencia().getJaneiro()));
-    	graficofrequencia.set("Fevereiro", Integer.parseInt(this.aluno.getFolha().getFrequencia().getFevereiro()));
-    	graficofrequencia.set("Marco", Integer.parseInt(this.aluno.getFolha().getFrequencia().getMarco()));
-    	graficofrequencia.set("Abril", Integer.parseInt(this.aluno.getFolha().getFrequencia().getAbril()));
-    	graficofrequencia.set("Maio", Integer.parseInt(this.aluno.getFolha().getFrequencia().getMaio()));
-    	graficofrequencia.set("Junho", Integer.parseInt(this.aluno.getFolha().getFrequencia().getJunho()));
-    	graficofrequencia.set("Julho", Integer.parseInt(this.aluno.getFolha().getFrequencia().getJulho()));
-    	graficofrequencia.set("Agosto", Integer.parseInt(this.aluno.getFolha().getFrequencia().getAgosto()));
-    	graficofrequencia.set("Setembro", Integer.parseInt(this.aluno.getFolha().getFrequencia().getSetembro()));
-    	graficofrequencia.set("Outubro", Integer.parseInt(this.aluno.getFolha().getFrequencia().getOutubro()));
-    	graficofrequencia.set("Novembro", Integer.parseInt(this.aluno.getFolha().getFrequencia().getNovembro()));
-    	graficofrequencia.set("Dezembro", Integer.parseInt(this.aluno.getFolha().getFrequencia().getDezembro()));
-         
-    	graficofrequencia.setTitle("Grafico de frequencias");
-    	graficofrequencia.setLegendPosition("e");
-    	graficofrequencia.setFill(false);
-    	graficofrequencia.setShowDataLabels(true);
-    	graficofrequencia.setDiameter(200);
-    }
+	// *CRIAR GR�FICOS*//
+
+	private PieChartModel graficofrequencia;
+
+	public PieChartModel getPieModel2() {
+		return graficofrequencia;
+	}
+
+	private void createPieModels() {
+		createPieModel2();
+	}
+
+	private void createPieModel2() {
+		graficofrequencia = new PieChartModel();
+
+		// aluno.getFolha().setFrequencia(folha.getFrequencia());
+
+		// graficofrequencia.set("Janeiro",
+		// Integer.parseInt(aluno.getFolha().getFrequencia().getJaneiro()));
+		graficofrequencia.set(
+				"Janeiro",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getJaneiro()));
+		graficofrequencia.set(
+				"Fevereiro",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getFevereiro()));
+		graficofrequencia.set(
+				"Marco",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getMarco()));
+		graficofrequencia.set(
+				"Abril",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getAbril()));
+		graficofrequencia.set(
+				"Maio",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getMaio()));
+		graficofrequencia.set(
+				"Junho",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getJunho()));
+		graficofrequencia.set(
+				"Julho",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getJulho()));
+		graficofrequencia.set(
+				"Agosto",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getAgosto()));
+		graficofrequencia.set(
+				"Setembro",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getSetembro()));
+		graficofrequencia.set(
+				"Outubro",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getOutubro()));
+		graficofrequencia.set(
+				"Novembro",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getNovembro()));
+		graficofrequencia.set(
+				"Dezembro",
+				Integer.parseInt(this.aluno.getFolha().getFrequencia()
+						.getDezembro()));
+
+		graficofrequencia.setTitle("Grafico de frequencias");
+		graficofrequencia.setLegendPosition("e");
+		graficofrequencia.setFill(false);
+		graficofrequencia.setShowDataLabels(true);
+		graficofrequencia.setDiameter(200);
+	}
 
 }
