@@ -2,6 +2,7 @@ package br.com.cadei.filtro;
 
 import java.io.IOException;
 
+import javax.faces.application.ResourceHandler;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -9,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.SessionFactory;
 
@@ -53,6 +56,19 @@ public class FiltroHibernate implements Filter {
 		try {
 			System.out.println("Iniciando Transa??o");
 			sf.getCurrentSession().beginTransaction();
+			
+			HttpServletRequest requests = (HttpServletRequest) request;
+	        HttpServletResponse responses = (HttpServletResponse) response;
+			responses.setHeader("Cache-Control", "no-cache"); // Prevents HTTP 1.1 caching.
+			responses.setHeader("Pragma", "no-cache"); // Prevents HTTP 1.0 caching.
+			responses.setDateHeader("Expires", -1); // Prevents proxy caching.
+			
+			if (!requests.getRequestURI().startsWith(requests.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER)) { // Skip JSF resources (CSS/JS/Images/etc)
+	            responses.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	            responses.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+	            responses.setDateHeader("Expires", 0); // Proxies.
+	        }
+			
 			chain.doFilter(request, response);
 			System.out.println("Comitando Transa??o");
 			sf.getCurrentSession().getTransaction().commit();

@@ -285,7 +285,7 @@ public class AlunoBean implements Serializable {
 			}
 		}
 
-		return "home";
+		return "home?faces-redirect=true";
 	}
 
 	public String delete() {
@@ -318,7 +318,7 @@ public class AlunoBean implements Serializable {
 			fc.addMessage(null, ms);
 		}
 		findAluno();
-		return "home";
+		return "home?faces-redirect=true";
 	}
 
 	@SuppressWarnings("unchecked")

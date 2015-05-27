@@ -159,7 +159,7 @@ public class RegistrosBean implements Serializable {
 			}
 		}
 
-		return "listaregistro";
+		return "listaregistro?faces-redirect=true";
 	}
 
 	public String delete() {
@@ -180,7 +180,7 @@ public class RegistrosBean implements Serializable {
 			fc.addMessage(null, ms);
 		}
 		findRegistro();
-		return "listaregistro";
+		return "listaregistro?faces-redirect=true";
 	}
 
 	@SuppressWarnings("unchecked")

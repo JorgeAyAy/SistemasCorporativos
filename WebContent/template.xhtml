@@ -40,19 +40,19 @@
     	<h:form >
         		 <p:slideMenu backLabel="Voltar" >
         				 <p:submenu label="Início" >
-                        	<p:menuitem title="Listar todos os alunos com vários comandos como deletar, editar, escrever folha e gerar relatório" value="Listar Alunos" ajax="false" action="home"/>
-                        	<p:menuitem title="Listar todos os  registros com vários comandos como deletar, editar, escrever folha e gerar relatório" value="Listar Registros" ajax="false" action="listaregistro"/>
+                        	<p:menuitem title="Listar todos os alunos com vários comandos como deletar, editar, escrever folha e gerar relatório" value="Listar Alunos" ajax="false" action="home?faces-redirect=true"/>
+                        	<p:menuitem title="Listar todos os  registros com vários comandos como deletar, editar, escrever folha e gerar relatório" value="Listar Registros" ajax="false" action="listaregistro?faces-redirect=true"/>
                         </p:submenu>
                       <p:submenu label="Professor">
                        		 <p:menuitem value="Editar" ajax="false" action="#{beanprofessor.novo}"/>
-                        	<p:menuitem value="Consulta" ajax="false" action="consultaProfessor"/>
+                        	<p:menuitem value="Consulta" ajax="false" action="consultaProfessor?faces-redirect=true"/>
                         </p:submenu>
                         <p:submenu label="Aluno">
                        		<p:menuitem value="Cadastrar" ajax="false" action="#{alunoBean.novo}"/>
                         </p:submenu>
                         <p:submenu label="Registro">
                        		<p:menuitem value="Cadastro" ajax="false" action="#{registroBean.novo}"/>
-                       		<p:menuitem value="Consulta" ajax="false" action="consultaRegistro"/>
+                       		<p:menuitem value="Consulta" ajax="false" action="consultaRegistro?faces-redirect=true"/>
                         </p:submenu>
                         <p:submenu  label="Configuracão" >
                         	<p:menuitem  value="Criar banco" action="#{beanBanco.criar}" title="clique aqui para criar o banco de dados do sistema (obrigatório)"/>
