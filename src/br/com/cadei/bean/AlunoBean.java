@@ -8,10 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIData;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +32,6 @@ import br.com.cadei.entidade.Aprendizagem;
 import br.com.cadei.entidade.Constantes;
 import br.com.cadei.entidade.Folha;
 import br.com.cadei.entidade.Frequencia;
-import br.com.cadei.entidade.Registros;
 
 @ManagedBean(name = "beanaluno")
 @SessionScoped
@@ -165,8 +165,22 @@ public class AlunoBean implements Serializable {
 	}
 
 	public String novo() {
+		
 		this.aluno = new Aluno();
 		return "cadastrofolhaaluno?faces-redirect=true";
+	}
+	
+	public void refresh() {
+		UIData ui = new UIData();
+		for(int i=0; i<ui.getRows(); ++i) {
+			ui.setRowIndex(i);
+			UIInput nameInput = (UIInput) FacesContext.getCurrentInstance().getViewRoot().findComponent("testee");
+			nameInput.setValue(null);
+			nameInput.setSubmittedValue(null);
+			nameInput.setLocalValueSet(false);
+			nameInput.setValid(true);
+		}
+		ui.setRowIndex(-1);
 	}
 
 	public void setAlunoList(List<Aluno> alunoList) {
@@ -293,7 +307,7 @@ public class AlunoBean implements Serializable {
 		try {
 
 			HibernateUtil.getSessionFactory().getCurrentSession().evict(aluno);
-
+			aluno = daoAluno.findByCod(aluno.getObjref());
 			ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(
 					Aprendizagem.class);
 			Aprendizagem a = aluno.getFolha().getAprendizagem();
@@ -302,12 +316,12 @@ public class AlunoBean implements Serializable {
 			ClassDao<Frequencia> daoFrequencia = new ClassDao<Frequencia>(
 					Frequencia.class);
 			Frequencia f = aluno.getFolha().getFrequencia();
-			daoFrequencia.save(f);
+			daoFrequencia.delete(f);
 
 			Folha folha = aluno.getFolha();
 			daoFolha.delete(folha);
 
-			aluno = daoAluno.findByCod(aluno.getObjref());
+			
 			daoAluno.delete(aluno);
 			fc.addMessage("home", new FacesMessage(
 					"Aluno Deletado com sucesso!!!"));
@@ -417,5 +431,8 @@ public class AlunoBean implements Serializable {
 		graficofrequencia.setShowDataLabels(true);
 		graficofrequencia.setDiameter(200);
 	}
+	
+	
+	
 
 }

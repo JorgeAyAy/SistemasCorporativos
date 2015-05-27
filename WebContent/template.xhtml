@@ -48,7 +48,7 @@
                         	<p:menuitem value="Consulta" ajax="false" action="consultaProfessor?faces-redirect=true"/>
                         </p:submenu>
                         <p:submenu label="Aluno">
-                       		<p:menuitem value="Cadastrar" ajax="false" action="#{alunoBean.novo}"/>
+                       		<p:menuitem value="Cadastrar" ajax="false" action="#{alunoBean.novo}" actionListener="#{alunoBean.refresh}" update=":cadastrofolhaaluno"/>
                         </p:submenu>
                         <p:submenu label="Registro">
                        		<p:menuitem value="Cadastro" ajax="false" action="#{registroBean.novo}"/>

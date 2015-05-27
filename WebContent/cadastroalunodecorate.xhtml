@@ -12,16 +12,10 @@
 	<h:outputScript name="locale-primefaces.js" library="js" />
 	<h:outputScript name="mascaras.js" library="js" />
 
-	<style type="text/css">
-body {
-	
-}
-</style>
 
 	<title>Sistema CadEI - VERSÃO TESTE</title>
-</h:head>
-
-<style type="text/css">
+	
+	<style type="text/css">
 #cadastroAlunos {
 	float: right;
 	padding-right: 150px;
@@ -38,13 +32,16 @@ body {
 }
 
 </style>
+	
+</h:head>
+
 
 
 <h:body>
 	<f:view>
 		<div id="cadastroAlunos">
 
-			<h:form>
+			<h:form id="testee">
 
 				<h:panelGrid columns="14" cellpadding="4">
 					<h:inputHidden value="#{beanaluno.aluno.objref}" />
@@ -68,7 +65,6 @@ body {
 					<p:selectBooleanCheckbox value="#{beanaluno.aluno.bolsaFamilia}"
 						id="bolsa">
 					</p:selectBooleanCheckbox>
-
 
 				</h:panelGrid>
 
