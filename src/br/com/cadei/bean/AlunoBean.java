@@ -317,7 +317,10 @@ public class AlunoBean implements Serializable {
 					Frequencia.class);
 			Frequencia f = aluno.getFolha().getFrequencia();
 			daoFrequencia.delete(f);
-
+			
+			
+			ClassDao<Folha> daoFolha = new ClassDao<Folha>(
+					Folha.class);
 			Folha folha = aluno.getFolha();
 			daoFolha.delete(folha);
 
