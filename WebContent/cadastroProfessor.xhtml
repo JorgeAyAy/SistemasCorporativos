@@ -6,12 +6,54 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p= "http://primefaces.org/ui">
+	
+	<h:head>
+    	
+    	<h:outputScript name="locale-primefaces.js" library="js" /> 
+    	<h:outputScript name="mascaras.js" library="js" /> 
+    	
+        <style type="text/css">
+            body {
+                font-family: geneva, arial, helvetica, sans-serif;
+                font-size: 60%;
+            }
+        </style>
 
-	<ui:decorate template="template.xhtml">
-	<ui:define name="conteudo">
+        <title>Sistema CadEI - VERSÃO TESTE</title>
+        <link href="#{request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    </h:head>
+    <h:body>
+    <f:view>
+	
+	 <p:layout fullPage="true">
+	 
+	 <!-- cabeçalho-->
+            <p:layoutUnit position="north" header="Sistema CadEI - VERSÃO TESTE" >
+            
+           	<br/>
+            </p:layoutUnit>
+             <!-- Menu lateral direito-->
+            
+		 <p:layoutUnit position="west" header="Menu" collapsible="true" >
+             
+    	<h:form >
+        		 <p:slideMenu backLabel="Voltar">
+        				 <p:submenu label="Inicio" >
+                        	<p:menuitem value="Login" ajax="false" action="login"/>
+                        </p:submenu>
+                      <p:submenu label="Tutorial">
+                        	<p:menuitem value="Consultar" ajax="false" action="login"/>
+                        </p:submenu>
+				</p:slideMenu>
+		</h:form>
+		</p:layoutUnit>
+		
 		<!-- Form cadastro professor -->	
+		<p:layoutUnit position="center"  >
+		
 		<p:fieldset legend="Cadastro de Professor">
 			<h:form id="cadastroProfessor">
+			
 			<p:messages autoUpdate="true"/>
 				<h:panelGrid columns="2">
 				<p/>
@@ -32,13 +74,26 @@
 					<h:inputSecret value="#{beanprofessor.resenha}" type="password" autocomplete="off"/>
 					<p:commandButton value="Salvar" action="#{beanprofessor.salvar}" />
 					<p:commandButton value="Limpar" action="#{beanprofessor.novo}" onclick="return confirm('Deseja limpar os dados inseridos?')" update=":cadastroProfessor"/>
+					
 				</h:panelGrid>
+				
 			</h:form>
+			
 		</p:fieldset>
+		</p:layoutUnit>
 		<!-- Fim Form cadastro professor -->	
-		
-	</ui:define>
-</ui:decorate>
+	
 
+            <!-- rodapé-->
+            <p:layoutUnit position="south" size="20">
+                Sistema CadEI - VERSÃO TESTE
+            </p:layoutUnit>
 
+          
+        </p:layout>
+
+ <ui:insert name="dialogs" />
+
+</f:view>
+    </h:body>
 </html>

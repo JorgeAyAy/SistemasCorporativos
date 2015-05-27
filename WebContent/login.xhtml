@@ -27,9 +27,9 @@
 				 modal="true" visible="true" >
 				<h:panelGrid columns="2">
 					<h:outputText value="Usuario:" />
-					<p:inputText value="#{loginBean.login}" required="true" requiredMessage="Digite o login."/>
+					<p:inputText value="#{loginBean.login}"/>
 					<h:outputText value="Senha:" />
-					<p:password value="#{loginBean.senha}" required="true" requiredMessage="Digite a senha."/>
+					<p:password value="#{loginBean.senha}"/>
 					<p:commandButton value="Entrar" action="#{loginBean.logar}"  />
 					<p:commandButton value="Cadastra Professor" action="cadastroProfessor?faces-redirect=true" />
 				</h:panelGrid>

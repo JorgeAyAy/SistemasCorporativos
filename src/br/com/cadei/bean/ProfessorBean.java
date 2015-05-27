@@ -155,6 +155,7 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 				professor = new Professor();
 				professorList = dao.findAll();
 				novo();
+				
 			}catch(Exception e){
 				e.printStackTrace();
 				FacesMessage ms = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", e.getMessage());
@@ -164,7 +165,7 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 			fc.addMessage("cadastroProfessor", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas n��o conferem.", null));
 		}
 		
-			return null;
+			return "login?faces-redirect=true";
 	}
 	
 	private boolean validarSenha() {

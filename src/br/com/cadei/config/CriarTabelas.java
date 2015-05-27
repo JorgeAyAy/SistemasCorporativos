@@ -6,36 +6,32 @@ import javax.faces.bean.RequestScoped;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-@ManagedBean(name="beanBanco")
+@ManagedBean(name = "beanBanco")
 @RequestScoped
 public class CriarTabelas {
 
-public CriarTabelas() {
+	public CriarTabelas() {
 
-
-}
-
-public static void main(String[] args){
-	criar();
-}
-	
-	public static String criar(){
-	try {
-		System.out.println("Criando banco de dados do zero...");
-		Configuration cfg = new Configuration();
-		cfg.configure("br/com/cadei/config/pgsql_hibernate.cfg.xml");
-		SchemaExport se = new SchemaExport(cfg);
-		se.create(true, true);
-	
-	} catch (Exception e) {
-		e.printStackTrace();
-
-	
 	}
-	
-	
-	return null;
+
+	public static void main(String[] args) {
+		criar();
 	}
-	
-	
+
+	public static String criar() {
+		try {
+			System.out.println("Criando banco de dados do zero...");
+			Configuration cfg = new Configuration();
+			cfg.configure("br/com/cadei/config/pgsql_hibernate.cfg.xml");
+			SchemaExport se = new SchemaExport(cfg);
+			se.create(true, true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		return null;
+	}
+
 }
