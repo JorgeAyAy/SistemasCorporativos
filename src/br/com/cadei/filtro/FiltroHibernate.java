@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
 
@@ -23,29 +24,29 @@ import br.com.cadei.dao.HibernateUtil;
 @WebFilter("/*")
 public class FiltroHibernate implements Filter {
 
-	
 	private SessionFactory sf;
-    /**
-     * Default constructor. 
-     */
-    public FiltroHibernate() {
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public FiltroHibernate() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-			try {
-				
-				if(sf.getCurrentSession().isOpen()){
-					sf.getCurrentSession().close();
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
 
+			if (sf.getCurrentSession().isOpen()) {
+				sf.getCurrentSession().close();
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 
 	}
 
@@ -54,11 +55,12 @@ public class FiltroHibernate implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
-			System.out.println("Iniciando Transa??o");
+			System.out.println("Iniciando Transacao");
 			sf.getCurrentSession().beginTransaction();
 			
 			HttpServletRequest requests = (HttpServletRequest) request;
 	        HttpServletResponse responses = (HttpServletResponse) response;
+	        HttpSession ses = requests.getSession(false);
 			responses.setHeader("Cache-Control", "no-cache"); // Prevents HTTP 1.1 caching.
 			responses.setHeader("Pragma", "no-cache"); // Prevents HTTP 1.0 caching.
 			responses.setDateHeader("Expires", -1); // Prevents proxy caching.
@@ -69,8 +71,19 @@ public class FiltroHibernate implements Filter {
 	            responses.setDateHeader("Expires", 0); // Proxies.
 	        }
 			
-			chain.doFilter(request, response);
-			System.out.println("Comitando Transa??o");
+			 String reqURI = requests.getRequestURI();
+	            if (reqURI.indexOf("/login.xhtml") >= 0
+	                    || (ses != null && ses.getAttribute("username") != null)
+	                    || reqURI.indexOf("/public/") >= 0 
+	                    || reqURI.indexOf("/cadastroProfessor.xhtml") >= 0
+	                    || reqURI.contains("javax.faces.resource")){
+	                chain.doFilter(request, response);
+	            }else{
+	            	responses.sendRedirect(requests.getContextPath() + "/login.xhtml");
+	            }
+			
+//			chain.doFilter(request, response);
+			System.out.println("Comitando Transacaoo");
 			sf.getCurrentSession().getTransaction().commit();
 			
 		} catch (Throwable e) {
@@ -97,11 +110,11 @@ public class FiltroHibernate implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		System.out.println("Iniciando configura??o de SessionFactory");
 		sf = HibernateUtil.getSessionFactory();
-		
-		if(sf.getCurrentSession().isOpen()){
+
+		if (sf.getCurrentSession().isOpen()) {
 			System.out.println("Session aberta");
 		}
-	
+
 	}
 
 }
