@@ -8,6 +8,11 @@
 	xmlns:p="http://primefaces.org/ui">
 <!--  <meta http-equiv="refresh" content="60"/> -->
 
+<f:metadata>
+	<f:viewParam name="fname" value="{#loginBean.login}" />
+</f:metadata>
+
+
 <h:head>
 
 	<h:outputScript name="locale-primefaces.js" library="js" />
@@ -32,12 +37,8 @@ body {
 			<!-- cabeçalho-->
 			<p:layoutUnit position="north" header="Sistema CadEI - VERSÃO TESTE">
 				<br />
-				<h:form>
-					<p>Sessao: #{loginBean.login}</p>
-					<h:commandLink action="#{loginBean.logout}" value="Logout" ajax="false"></h:commandLink>
-				</h:form>
-			</p:layoutUnit>
 
+			</p:layoutUnit>
 
 
 			<!-- Menu lateral direito-->
@@ -77,6 +78,9 @@ body {
 								title="clique aqui para criar o banco de dados do sistema (obrigatório)" />
 						</p:submenu>
 					</p:slideMenu>
+					<p>Sessao: #{loginBean.login}</p>
+					<h:commandLink action="#{loginBean.logout}" value="Logout"
+						ajax="false"></h:commandLink>
 				</h:form>
 
 			</p:layoutUnit>

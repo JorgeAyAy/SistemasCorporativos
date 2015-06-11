@@ -73,7 +73,7 @@ public class FiltroHibernate implements Filter {
 			
 			 String reqURI = requests.getRequestURI();
 	            if (reqURI.indexOf("/login.xhtml") >= 0
-	                    || (ses != null && ses.getAttribute("username") != null)
+	                    || (ses != null && ses.getAttribute("nome") != null)
 	                    || reqURI.indexOf("/public/") >= 0 
 	                    || reqURI.indexOf("/cadastroProfessor.xhtml") >= 0
 	                    || reqURI.contains("javax.faces.resource")){
@@ -83,7 +83,7 @@ public class FiltroHibernate implements Filter {
 	            }
 			
 //			chain.doFilter(request, response);
-			System.out.println("Comitando Transacaoo");
+			System.out.println("Comitando Transacao");
 			sf.getCurrentSession().getTransaction().commit();
 			
 		} catch (Throwable e) {

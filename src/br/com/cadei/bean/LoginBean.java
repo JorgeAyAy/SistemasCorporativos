@@ -17,7 +17,7 @@ public class LoginBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1094801825228386363L;
+	private static final long serialVersionUID = 1L;
 
 	private String login;
 	private String senha;
@@ -40,8 +40,8 @@ public class LoginBean implements Serializable {
 			if (professor.validarSenhaProfessor(this.getLogin(),
 					this.getSenha())) {
 				HttpSession session = SessionBean.getSession();
-	            session.setAttribute("username", login);
-				return "index?faces-redirect=true";
+	            session.setAttribute("nome", login);
+				return "index?faces-redirect=true&amp;includeViewParams=true";
 			}
 		}
 		return null;

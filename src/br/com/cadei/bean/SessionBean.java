@@ -19,13 +19,13 @@ public class SessionBean {
 	public static String getUserName() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
 				.getExternalContext().getSession(false);
-		return session.getAttribute("username").toString();
+		return session.getAttribute("nome").toString();
 	}
 
 	public static String getUserId() {
 		HttpSession session = getSession();
 		if (session != null)
-			return (String) session.getAttribute("userid");
+			return (String) session.getAttribute("objref");
 		else
 			return null;
 	}
