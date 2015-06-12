@@ -41,7 +41,7 @@ public class LoginBean implements Serializable {
 					this.getSenha())) {
 				HttpSession session = SessionBean.getSession();
 	            session.setAttribute("nome", login);
-				return "index?faces-redirect=true&amp;includeViewParams=true";
+				return "index";
 			}
 		}
 		return null;
