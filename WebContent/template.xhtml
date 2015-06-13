@@ -28,6 +28,7 @@ body {
 	<title>Sistema CadEI - VERSÃO TESTE</title>
 	<link href="#{request.contextPath}/resources/img/favicon.ico"
 		rel="shortcut icon" type="image/x-icon" />
+		
 </h:head>
 <h:body>
 	<f:view>
@@ -35,15 +36,15 @@ body {
 		<p:layout fullPage="true">
 
 			<!-- cabeçalho-->
-			<p:layoutUnit position="north" header="Sistema CadEI - VERSÃO TESTE">
-				<br />
-
+			<p:layoutUnit position="north" header="Sistema CadEI - VERSÃO TESTE" size="75">
+				<h:form>Sessao: #{loginBean.login} <br style="clear: left;" /><br style="clear: left;" />
+				<h:commandLink action="#" value="Perfil"
+						ajax="false"></h:commandLink><p:spacer width="10" height="10" /><h:commandLink action="#{loginBean.logout}" value="Logout"
+						ajax="false"></h:commandLink>		
+						</h:form>
 			</p:layoutUnit>
-
-
 			<!-- Menu lateral direito-->
 			<p:layoutUnit position="west" header="Menu" collapsible="true">
-
 				<h:form>
 					<p:slideMenu backLabel="Voltar">
 						<p:submenu label="Início">
@@ -78,18 +79,20 @@ body {
 								title="clique aqui para criar o banco de dados do sistema (obrigatório)" />
 						</p:submenu>
 					</p:slideMenu>
+<<<<<<< HEAD
 					<p>Logado como: #{loginBean.login}</p>
 					<h:commandLink action="#{loginBean.logout}" value="Logout"
 						ajax="false"></h:commandLink>
+=======
+>>>>>>> branch 'master' of https://github.com/JorgeAyAy/SistemasCorporativos.git
 				</h:form>
 
 			</p:layoutUnit>
 
 			<!-- rodapé-->
-			<p:layoutUnit position="south" size="20">
-                Sistema CadEI - VERSÃO TESTE
+			<p:layoutUnit position="south" size="30">
+                Sistema CadEI - VERSÃO TESTE - <h:form><h:commandLink action="about" value="About" ajax="false"></h:commandLink></h:form>   
             </p:layoutUnit>
-
 			<!-- conteudo -->
 			<p:layoutUnit position="center">
 
