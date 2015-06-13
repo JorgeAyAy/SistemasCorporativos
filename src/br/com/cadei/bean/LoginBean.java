@@ -41,7 +41,7 @@ public class LoginBean implements Serializable {
 					this.getSenha())) {
 				HttpSession session = SessionBean.getSession();
 	            session.setAttribute("nome", login);
-				return "index";
+				return "index?faces-redirect=true";
 			}
 		}
 		return null;
@@ -51,6 +51,10 @@ public class LoginBean implements Serializable {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
         return "login?faces-redirect=true";
+    }
+	
+	public boolean isLoggedIn() {
+        return login != null;
     }
 
 	public String getLogin() {

@@ -49,7 +49,7 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 	
 	public String editar()
 	{
-		return "cadastroProfessor?faces-redirect=true";
+		return "editarProfessor?faces-redirect=true";
 	}
 
 	public int getTipoConsulta() {
@@ -134,7 +134,7 @@ public class ProfessorBean implements Serializable, ProfessorBeanIF{
 				try{
 					dao.update(professor);
 					novo();
-					fc.addMessage("cadastroProfessor", new FacesMessage("Professor Salvo com sucesso!!!"));
+					fc.addMessage("editarProfessor", new FacesMessage("Professor Editado com sucesso!!!"));
 					professor = new Professor();
 					professorList = dao.findAll();
 					novo();

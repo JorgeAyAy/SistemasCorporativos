@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="template.xhtml">
+	<ui:define name="conteudo">
+		<!-- Form cadastro professor -->
+		<p:fieldset legend="Editar Professor">
+			<h:form id="editarProfessor">
+				<p:messages autoUpdate="true" />
+				<h:panelGrid columns="2">
+					<p />
+					<h:inputHidden value="#{beanprofessor.professor.objref}" />
+					<h:outputLabel value="Nome:" />
+					<h:inputText value="#{beanprofessor.professor.nome}"
+						required="true" autocomplete="off"
+						requiredMessage="NOME Obrigatório!" />
+					<h:outputLabel value="Email:" />
+					<h:inputText value="#{beanprofessor.professor.email}"
+						required="true" label="Email" validatorMessage="E-mail incorreto!">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+					<h:outputLabel value="Turma:" />
+					<h:selectOneMenu value="#{beanprofessor.turma}" required="true"
+						requiredMessage="Selecione a Turma">
+						<f:selectItems value="#{beanprofessor.constantes.turmas}"
+							var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.nome}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="Senha:" />
+					<h:inputSecret value="#{beanprofessor.professor.senha}"
+						type="password" maxlength="14" autocomplete="off" required="true"
+						requiredMessage="Senha Obrigatória!" />
+					<h:outputLabel value="Repita a senha:" />
+					<h:inputSecret value="#{beanprofessor.resenha}" type="password"
+						autocomplete="off" />
+					<p:commandButton value="Salvar" action="#{beanprofessor.salvar}" />
+					<p:commandButton value="Limpar" action="#{beanprofessor.novo}"
+						onclick="return confirm('Deseja limpar os dados inseridos?')"
+						update=":editarProfessor" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:fieldset>
+		<!-- Fim Form cadastro professor -->
+
+	</ui:define>
+</ui:decorate>
+
+
+</html>
