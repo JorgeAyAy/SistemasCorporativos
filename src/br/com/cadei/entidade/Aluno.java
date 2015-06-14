@@ -42,9 +42,15 @@ public class Aluno implements Serializable {
 
 	@OneToOne
 	private Folha folha;
+	
+	@Column
+	private byte[] imagem;
+	
+	@Column
+	private String nomeArquivo;
 
 	public Aluno(Integer objref, String nome, Long nis,
-			Date dataNascimento, Long matricula, boolean bolsaFamilia) {
+			Date dataNascimento, Long matricula, boolean bolsaFamilia, byte[] imagem, String nomeArquivo) {
 		super();
 		this.objref = objref;
 		this.nome = nome;
@@ -52,6 +58,8 @@ public class Aluno implements Serializable {
 		this.matricula = matricula;
 		this.bolsaFamilia = bolsaFamilia;
 		this.dataNascimento = dataNascimento;
+		this.imagem = imagem;
+		this.nomeArquivo = nomeArquivo;
 	}
 	
 	public Aluno(){
@@ -121,5 +129,20 @@ public class Aluno implements Serializable {
 		this.folha = folha;
 	}
 
+	public byte[] getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+
+	public String getNomeArquivo() {
+		return nomeArquivo;
+	}
+
+	public void setNomeArquivo(String nomeArquivo) {
+		this.nomeArquivo = nomeArquivo;
+	}
 	
 }

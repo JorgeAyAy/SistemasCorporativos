@@ -17,18 +17,20 @@
 
 	<style type="text/css">
 #cadastroAlunos {
-	float: right;
-	padding-right: 150px;
+	float: left;
+	padding-left: 10px;
 	font-family: Cambria;
+	font-size: 12px;
 	color: #6495ED;
-	text-align: right;
+	text-align: left;
 }
 
 #botao2 {
-	float: right;
-	padding-left: 250px;
+	float: left;
+	padding-left: 10px;
+	padding-top: 20px;
 	text-align: right;
-	font-size: 15px;
+	font-size: 12px;
 }
 </style>
 
@@ -40,9 +42,9 @@
 	<f:view>
 		<div id="cadastroAlunos">
 
-			<h:form id="testee">
+			<h:form id="testee" enctype="multipart/form-data">
 
-				<h:panelGrid columns="14" cellpadding="4">
+				<h:panelGrid columns="1" cellpadding="4">
 					<h:inputHidden value="#{beanaluno.aluno.objref}" />
 					<h:outputLabel for="name" value="Nome: " style="font-size:13" />
 					<p:inputText value="#{beanaluno.aluno.nome}" id="nome"
@@ -61,17 +63,22 @@
 						required="true" size="13" />
 					<p:outputLabel for="bolsa" value="Bolsa Família:"
 						style="font-size:13" />
-					<p:selectBooleanCheckbox value="#{beanaluno.aluno.bolsaFamilia}"
-						id="bolsa">
-					</p:selectBooleanCheckbox>
-
+						<p:selectBooleanCheckbox value="#{beanaluno.aluno.bolsaFamilia}"
+							id="bolsa">
+						</p:selectBooleanCheckbox>
+						<h3>Upload</h3>
+						<h:messages></h:messages>
+						<p:growl id="messages" showDetail="true" />
+							<p:fileUpload value="#{beanaluno.file}" mode="simple"
+								skinSimple="true" fileUploadListener="#{beanaluno.fileUploadListener}"/>
 				</h:panelGrid>
 
 				<div id="botao2">
 					<p:commandButton title="clique aqui para salvar suas edições"
-						value="Salvar" action="#{beanaluno.salvar}" icon="ui-icon-disk" />
+						value="Salvar" ajax="false"
+						action="#{beanaluno.salvar}" icon="ui-icon-disk" />
 				</div>
-				
+
 			</h:form>
 		</div>
 

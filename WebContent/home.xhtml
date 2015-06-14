@@ -7,14 +7,14 @@
 
 <h:head>
 
-<title>Sistema CadEI - VERSÃO TESTE</title>
-<link href="#{request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-   
+	<title>Sistema CadEI - VERSÃO TESTE</title>
+	<link href="#{request.contextPath}/resources/img/favicon.ico"
+		rel="shortcut icon" type="image/x-icon" />
+
 
 </h:head>
 
 <style type="text/css">
-
 #menu {
 	float: left;
 	padding-top: 30px;
@@ -24,7 +24,6 @@
 	color: #6495ED;
 	text-align: left;
 }
-
 
 #listaalunoeregistro {
 	float: right;
@@ -41,13 +40,12 @@
 }
 
 h1 {
-    text-align: center;
+	text-align: center;
 }
-
 </style>
 
 
-<h:body >
+<h:body>
 
 
 	<!-- VV Lista de Alunos e Registros VV -->
@@ -55,84 +53,93 @@ h1 {
 		<ui:define name="conteudo">
 			<div id="listaaluno">
 				<h1>Lista de Alunos</h1>
-					<hr></hr>
-					
-					<f:metadata>
-						<f:event type="preRenderView" listener="#{beanaluno.popularList}" />
-					</f:metadata>
-					
-					<h:form id="aluno"> 
-					
+				<hr></hr>
+
+				<f:metadata>
+					<f:event type="preRenderView" listener="#{beanaluno.popularList}" />
+				</f:metadata>
+
+				<h:form id="aluno">
+
 					<p:growl id="msgs" showDetail="true" />
-					
-					<p:accordionPanel value="#{beanaluno.alunoList}" var="aluno" activeIndex="" multiple="true" dynamic="false" cache="false">
-					
+
+					<p:accordionPanel value="#{beanaluno.alunoList}" var="aluno"
+						activeIndex="" multiple="true" dynamic="false" cache="false">
+
 						<p:tab title="Aluno - #{aluno.nome}">
 							<h:panelGrid columns="2" cellpadding="5" id="alunos">
+								<h:outputText value="Nome imagem:" style="font-weight: bold" />
+								<h:outputText value="#{aluno.nomeArquivo}" />
+								<h:outputText value="imagem:" />
+								<p:graphicImage value="#{images.image}">
+									<f:param name="id" value="#{aluno.objref}" />
+								</p:graphicImage>
 								<h:outputText value="NIS:" style="font-weight: bold" />
 								<h:outputText value="#{aluno.nis}" />
 
 								<h:outputText value="Matrícula:" style="font-weight: bold" />
-								<h:outputText value="#{aluno.matricula}"  />
-								
+								<h:outputText value="#{aluno.matricula}" />
+
 								<h:outputText value="Bolsa:" style="font-weight: bold" />
-								<h:outputText value="#{aluno.bolsaFamilia}"  />
-								
+								<h:outputText value="#{aluno.bolsaFamilia}" />
+
 								<h:outputText value="Menu:" style="font-weight: bold" />
-								
+
 								<p:column headerText="Opções">
-								<h:commandLink action="#{beanaluno.editar}">
-									<h:graphicImage library="img" title="editar" name="editar.png"
-										style="border:0" />
-									<f:setPropertyActionListener target="#{beanaluno.aluno}"
-										value="#{aluno}" />
-										
-								</h:commandLink>
-								
-								<h:commandLink  action="#{beanaluno.delete}"
-									onclick="return confirm('Deseja realmente deletar o aluno e todos as suas referências?')">
-									<h:graphicImage library="img" name="excluir.png"
-										style="border:0" />
-									<f:setPropertyActionListener target="#{beanaluno.aluno}"
-										value="#{aluno}" />
-								</h:commandLink>
-								
-               
-               
-								<h:commandLink  action="#{beanaluno.editarFolha}">
-									<h:graphicImage library="img" name="doc.jpg"
-										style="border:0" />
-									<f:setPropertyActionListener target="#{beanaluno.aluno}"
-										value="#{aluno}" />
-								</h:commandLink>
-								
-								
-								<h:commandLink  action="#{beanaluno.imprimirSalvar}">
-									<h:graphicImage library="img" name="rel.png"
-										style="border:0" />
-									<f:setPropertyActionListener target="#{beanaluno.aluno}"
-										value="#{aluno}" />
-								</h:commandLink>
-								
-								
-								<h:commandLink  title="clique aqui para gerar um gráfico de pizza com o resumo das frequências do dado aluno" action="#{beanaluno.criarGrafico}">
-									<h:graphicImage library="img"  name="frequencia.png"
-										style="border:0" />
-									<f:setPropertyActionListener target="#{beanaluno.aluno}"
-										value="#{aluno}" />
-								</h:commandLink>
-								
-								<h:commandLink   title="clique aqui para gerar um backup do aluno" action="#{beanaluno.imprimirBackup}">
-									<h:graphicImage library="img" name="Backup.png"
-										style="border:0" />
-									<f:setPropertyActionListener target="#{beanaluno.aluno}"
-										value="#{aluno}" />
-								</h:commandLink>
+									<h:commandLink action="#{beanaluno.editar}">
+										<h:graphicImage library="img" title="editar" name="editar.png"
+											style="border:0" />
+										<f:setPropertyActionListener target="#{beanaluno.aluno}"
+											value="#{aluno}" />
+
+									</h:commandLink>
+
+									<h:commandLink action="#{beanaluno.delete}"
+										onclick="return confirm('Deseja realmente deletar o aluno e todos as suas referências?')">
+										<h:graphicImage library="img" name="excluir.png"
+											style="border:0" />
+										<f:setPropertyActionListener target="#{beanaluno.aluno}"
+											value="#{aluno}" />
+									</h:commandLink>
+
+
+
+									<h:commandLink action="#{beanaluno.editarFolha}">
+										<h:graphicImage library="img" name="doc.jpg" style="border:0" />
+										<f:setPropertyActionListener target="#{beanaluno.aluno}"
+											value="#{aluno}" />
+									</h:commandLink>
+
+
+									<h:commandLink action="#{beanaluno.imprimirSalvar}">
+										<h:graphicImage library="img" name="rel.png" style="border:0" />
+										<f:setPropertyActionListener target="#{beanaluno.aluno}"
+											value="#{aluno}" />
+									</h:commandLink>
+
+
+									<h:commandLink
+										title="clique aqui para gerar um gráfico de pizza com o resumo das frequências do dado aluno"
+										action="#{beanaluno.criarGrafico}">
+										<h:graphicImage library="img" name="frequencia.png"
+											style="border:0" />
+										<f:setPropertyActionListener target="#{beanaluno.aluno}"
+											value="#{aluno}" />
+									</h:commandLink>
+
+									<h:commandLink
+										title="clique aqui para gerar um backup do aluno"
+										action="#{beanaluno.imprimirBackup}">
+										<h:graphicImage library="img" name="Backup.png"
+											style="border:0" />
+										<f:setPropertyActionListener target="#{beanaluno.aluno}"
+											value="#{aluno}" />
+									</h:commandLink>
 								</p:column>
 							</h:panelGrid>
 						</p:tab>
 					</p:accordionPanel>
-					</h:form>
+				</h:form>
 			</div>
 		</ui:define>
 	</ui:decorate>

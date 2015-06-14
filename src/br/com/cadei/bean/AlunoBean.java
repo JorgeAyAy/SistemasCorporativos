@@ -1,5 +1,9 @@
 package br.com.cadei.bean;
 
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -14,6 +18,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIData;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -23,6 +29,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
 import org.hibernate.engine.SessionFactoryImplementor;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.UploadedFile;
 import org.primefaces.model.chart.PieChartModel;
 
 import br.com.cadei.dao.ClassDao;
@@ -46,6 +55,8 @@ public class AlunoBean implements Serializable {
 	private List<Aluno> alunoList;
 	private ClassDao<Aluno> daoAluno;
 	private ClassDao<Folha> daoFolha;
+	private UploadedFile file;
+	private byte[] bimagem;
 	private int tipoConsulta;
 	private String campo;
 	private Folha folha; // MODIFICADO
@@ -165,16 +176,17 @@ public class AlunoBean implements Serializable {
 	}
 
 	public String novo() {
-		
+
 		this.aluno = new Aluno();
 		return "cadastrofolhaaluno?faces-redirect=true";
 	}
-	
+
 	public void refresh() {
 		UIData ui = new UIData();
-		for(int i=0; i<ui.getRows(); ++i) {
+		for (int i = 0; i < ui.getRows(); ++i) {
 			ui.setRowIndex(i);
-			UIInput nameInput = (UIInput) FacesContext.getCurrentInstance().getViewRoot().findComponent("testee");
+			UIInput nameInput = (UIInput) FacesContext.getCurrentInstance()
+					.getViewRoot().findComponent("testee");
 			nameInput.setValue(null);
 			nameInput.setSubmittedValue(null);
 			nameInput.setLocalValueSet(false);
@@ -248,6 +260,9 @@ public class AlunoBean implements Serializable {
 
 		folha = new Folha();
 
+		aluno.setImagem(this.bimagem);
+		aluno.setNomeArquivo(this.file.getFileName());
+
 		ClassDao<Aprendizagem> daoAprendizagem = new ClassDao<Aprendizagem>(
 				Aprendizagem.class);
 		Aprendizagem a = new Aprendizagem();
@@ -257,7 +272,6 @@ public class AlunoBean implements Serializable {
 				Frequencia.class);
 		Frequencia f = new Frequencia();
 		daoFrequencia.save(f);
-
 		this.folha.setAprendizagem(a);
 		this.folha.setFrequencia(f);
 		this.aluno.setFolha(folha); // MODIFICADO
@@ -317,14 +331,11 @@ public class AlunoBean implements Serializable {
 					Frequencia.class);
 			Frequencia f = aluno.getFolha().getFrequencia();
 			daoFrequencia.delete(f);
-			
-			
-			ClassDao<Folha> daoFolha = new ClassDao<Folha>(
-					Folha.class);
+
+			ClassDao<Folha> daoFolha = new ClassDao<Folha>(Folha.class);
 			Folha folha = aluno.getFolha();
 			daoFolha.delete(folha);
 
-			
 			daoAluno.delete(aluno);
 			fc.addMessage("home", new FacesMessage(
 					"Aluno Deletado com sucesso!!!"));
@@ -434,8 +445,42 @@ public class AlunoBean implements Serializable {
 		graficofrequencia.setShowDataLabels(true);
 		graficofrequencia.setDiameter(200);
 	}
-	
-	
-	
+
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+
+	public byte[] getBimagem() {
+		return bimagem;
+	}
+
+	public void setBimagem(byte[] bimagem) {
+		this.bimagem = bimagem;
+	}
+
+	public void fileUploadListener(FileUploadEvent e) throws IOException {
+		// Get uploaded file from the FileUploadEvent
+		this.file = e.getFile();
+		this.bimagem = e.getFile().getContents();
+		// Print out the information of the file
+		System.out.println("Uploaded File Name Is :: " + file.getFileName()
+				+ " :: Uploaded File Size :: " + file.getSize());
+	}
+
+	public DefaultStreamedContent getImage(int studentId) {
+		InputStream is = new ByteArrayInputStream((byte[]) bimagem);
+		return new DefaultStreamedContent(is, "image/png");
+	}
+
+	@PersistenceContext
+	private EntityManager em;
+
+	public Aluno find(Integer integer) {
+		return em.find(Aluno.class, integer);
+	}
 
 }

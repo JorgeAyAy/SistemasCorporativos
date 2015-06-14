@@ -44,6 +44,10 @@
                       <p:submenu label="Tutorial">
                         	<p:menuitem value="Consultar" ajax="false" action="login"/>
                         </p:submenu>
+                        <p:submenu label="Configuracão">
+							<p:menuitem value="Criar banco" action="#{beanBanco.criar}"
+								title="clique aqui para criar o banco de dados do sistema (obrigatório)" />
+						</p:submenu>
 				</p:slideMenu>
 		</h:form>
 		</p:layoutUnit>
